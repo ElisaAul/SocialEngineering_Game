@@ -1,5 +1,6 @@
 ﻿title: Start
-position: -56,-349
+position: -109,-617
+color: green
 ---
 <<declare $trust = 0>>
 <<declare $knows_secret = false>>
@@ -21,9 +22,13 @@ Traveler: Greetings, wanderer. These roads can be dangerous alone.
     You walk past without a word.
     Traveler: Suit yourself... but beware the bridge ahead.
     <<jump Alone>>
+-> Ask them about sheep
+    <<jump sheep>>
 ===
 title: TravelTogether
-position: 135,-182
+position: 206,-258
+color: green
+group: Travel
 ---
 You walk together down the winding path.
 
@@ -44,7 +49,8 @@ Traveler: I should warn you—there's trouble at the old bridge.
     <<jump Bridge>>
 ===
 title: Suspicious
-position: -125,-74
+position: -179,-149
+color: red
 ---
 Traveler: I understand caution. The world has earned it.
 
@@ -64,7 +70,8 @@ Traveler: Here—take this. It shows a path around the bandits at the bridge.
     <<jump Bridge>>
 ===
 title: Alone
-position: 0,150
+position: -62,104
+color: green
 ---
 You continue alone.
 
@@ -74,6 +81,7 @@ The bridge looms ahead, three figures waiting in the shadows.
 ===
 title: SecretPath
 position: -149,311
+color: purple
 ---
 Following the hidden path, you bypass the bridge entirely.
 
@@ -84,7 +92,8 @@ You emerge safely on the other side, grateful for the unexpected help.
 // Continue your story here!
 ===
 title: Bridge
-position: 83,312
+position: 466,-356
+group: Travel
 ---
 The bridge bandits block your path.
 
@@ -108,7 +117,7 @@ You cross the bridge and continue your journey.
 ===
 
 title: sheep
-position: 292,127
+position: 100,-936
 ---
 Narrator: Did you see a sheep?
     -> Yes!
@@ -121,4 +130,17 @@ Narrator: Did you see a sheep?
     <<jump Start>>
     -> Nah.
     <<jump Start>>
+===
+title: Node
+position: 365,-78
+---
+
+===
+title: Note1
+style: note
+position: 221,-368
+color: green
+---
+Test Note: 
+only for testing purposes
 ===
