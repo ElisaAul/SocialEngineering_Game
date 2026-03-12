@@ -1,0 +1,12 @@
+# Unity YAML-Dateien als Text behandeln
+*.cs     diff=csharp
+*.unity  merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.asset  merge=unityyamlmerge eol=lf
+*.meta   -text
+
+# Binärdateien
+*.png binary
+*.jpg binary
+*.fbx binary
+*.wav binary
