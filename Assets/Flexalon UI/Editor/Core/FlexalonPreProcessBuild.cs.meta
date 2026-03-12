@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: e3fe75abbf8904145a5d1083c71cb006
+AssetOrigin:
+  serializedVersion: 1
+  productId: 254652
+  packageName: 'Flexalon: UI Layouts'
+  packageVersion: 4.4.0
+  assetPath: Assets/Flexalon/Editor/Core/FlexalonPreProcessBuild.cs
+  uploadId: 829768
