@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f6269613c270d4649a2f42e0ef148278
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Scripts/Editor/YarnSpinner.Unity.Samples.Editor.asmdef
+  uploadId: 856596

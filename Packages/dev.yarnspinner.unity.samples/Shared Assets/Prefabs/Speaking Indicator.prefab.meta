@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1524f860a8a554bddbb501cbc8bc047e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Prefabs/Speaking
+    Indicator.prefab
+  uploadId: 856596

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: efe2bc12ffa6d45dda98aa4998c34e99
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/Skybox-Nebula.mat
+  uploadId: 856596

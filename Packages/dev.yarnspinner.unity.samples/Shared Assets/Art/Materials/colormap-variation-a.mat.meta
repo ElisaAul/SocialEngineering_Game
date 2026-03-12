@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2f50f611fe10b4df7885b02140e5c46c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/colormap-variation-a.mat
+  uploadId: 856596

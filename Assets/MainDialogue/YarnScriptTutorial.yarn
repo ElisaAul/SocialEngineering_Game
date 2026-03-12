@@ -131,16 +131,4 @@ Narrator: Did you see a sheep?
     -> Nah.
     <<jump Start>>
 ===
-title: Node
-position: 365,-78
----
 
-===
-title: Note1
-style: note
-position: 221,-368
-color: green
----
-Test Note: 
-only for testing purposes
-===

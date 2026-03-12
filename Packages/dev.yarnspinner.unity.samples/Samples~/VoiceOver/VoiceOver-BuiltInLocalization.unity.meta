@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f25e13c69945343bea2dbed14ea599b5
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/VoiceOver/VoiceOver-BuiltInLocalization.unity
+  uploadId: 856596

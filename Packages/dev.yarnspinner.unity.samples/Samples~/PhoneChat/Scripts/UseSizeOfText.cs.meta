@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b00b7cd82bb594539828dd867dbf3ec0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/PhoneChat/Scripts/UseSizeOfText.cs
+  uploadId: 856596

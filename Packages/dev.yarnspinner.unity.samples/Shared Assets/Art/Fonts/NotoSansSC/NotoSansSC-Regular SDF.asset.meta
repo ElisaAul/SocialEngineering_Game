@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c650173c60297416181ddf7a303a403a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Fonts/NotoSansSC/NotoSansSC-Regular
+    SDF.asset
+  uploadId: 856596

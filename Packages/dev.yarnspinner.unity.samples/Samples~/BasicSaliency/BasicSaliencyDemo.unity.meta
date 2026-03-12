@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7d720bc55cae54f4d81b287a72087a64
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/BasicSaliency/BasicSaliencyDemo.unity
+  uploadId: 856596

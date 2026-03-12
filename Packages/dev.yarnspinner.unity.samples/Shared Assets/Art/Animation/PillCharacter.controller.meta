@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dc28f66c8b98047b59fae422a92cbe9b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/PillCharacter.controller
+  uploadId: 856596
