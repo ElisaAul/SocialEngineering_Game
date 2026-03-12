@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90953611a6c294b9c8d9bc376153de25
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/VoiceOver/VoiceOver-UnityLocalization/LightingData.asset
+  uploadId: 856596

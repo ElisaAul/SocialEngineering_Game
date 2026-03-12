@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 87d48b15784384439889fb74e3202a70
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/OptionsThatTimeout/YarnSpinner.Unity.Samples.OptionsThatTimeout.asmdef
+  uploadId: 856596

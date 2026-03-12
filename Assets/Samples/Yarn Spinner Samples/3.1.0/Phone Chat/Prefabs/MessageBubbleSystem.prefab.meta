@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8fd08f878702e4dd08bffadd59178457
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319418
+  packageName: Yarn Spinner for Unity Samples
+  packageVersion: 3.1.1
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/PhoneChat/Prefabs/MessageBubbleSystem.prefab
+  uploadId: 856596
