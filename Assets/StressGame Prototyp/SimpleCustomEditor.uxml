@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="These controls were created in UI Builder"/>
+    <ui:Button text="This is Button1" name="Button1"/>
+    <ui:Toggle label="Toggle"/>
+</ui:UXML>

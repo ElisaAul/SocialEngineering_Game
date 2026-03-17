@@ -6,7 +6,7 @@ namespace Yarn.Unity.Samples {
     /// Character
     /// </summary>
     /// <remarks>
-    /// Automatically generated from Yarn project at Assets/Samples/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
+    /// Automatically generated from Yarn project at Assets/Samples YarnSpinner/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
     /// </remarks>
     [System.CodeDom.Compiler.GeneratedCode("YarnSpinner", "3.1.3.0")]
     public enum Character {
@@ -52,7 +52,7 @@ namespace Yarn.Unity.Samples {
     /// Scenario
     /// </summary>
     /// <remarks>
-    /// Automatically generated from Yarn project at Assets/Samples/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
+    /// Automatically generated from Yarn project at Assets/Samples YarnSpinner/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
     /// </remarks>
     [System.CodeDom.Compiler.GeneratedCode("YarnSpinner", "3.1.3.0")]
     public enum Scenario {
@@ -98,7 +98,7 @@ namespace Yarn.Unity.Samples {
     /// Room
     /// </summary>
     /// <remarks>
-    /// Automatically generated from Yarn project at Assets/Samples/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
+    /// Automatically generated from Yarn project at Assets/Samples YarnSpinner/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
     /// </remarks>
     [System.CodeDom.Compiler.GeneratedCode("YarnSpinner", "3.1.3.0")]
     public enum Room {
@@ -144,7 +144,7 @@ namespace Yarn.Unity.Samples {
     /// ScenarioState
     /// </summary>
     /// <remarks>
-    /// Automatically generated from Yarn project at Assets/Samples/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
+    /// Automatically generated from Yarn project at Assets/Samples YarnSpinner/Yarn Spinner Samples/3.1.0/Advanced Saliency/AdvancedSaliency.yarnproject.
     /// </remarks>
     [System.CodeDom.Compiler.GeneratedCode("YarnSpinner", "3.1.3.0")]
     public enum ScenarioState {
