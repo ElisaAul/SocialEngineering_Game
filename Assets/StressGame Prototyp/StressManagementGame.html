@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stressmanagement — Interaktives Lernspiel</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0efe9;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --text: #1a1a18;
+    --text2: #6b6a64;
+    --text3: #9b9a94;
+    --green: #1D9E75;
+    --green-bg: #EAF3DE;
+    --green-text: #27500A;
+    --green-border: #97C459;
+    --red: #E24B4A;
+    --red-bg: #FCEBEB;
+    --red-text: #791F1F;
+    --red-border: #F09595;
+    --amber: #EF9F27;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .game {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 1.75rem;
+    font-family: sans-serif;
+  }
+
+  .stress-bar-wrap {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0.5px solid var(--border);
+  }
+
+  .stress-label {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .bar-outer {
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .bar-inner {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1), background-color 0.6s ease;
+  }
+
+  .stress-value {
+    font-size: 18px;
+    margin-top: 10px;
+    font-family: sans-serif;
+  }
+
+  .progress-wrap {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .dot {
+    height: 3px;
+    flex: 1;
+    border-radius: 999px;
+    background: var(--border2);
+    transition: background 0.3s;
+  }
+
+  .dot.done { background: var(--green); }
+  .dot.active { background: var(--text2); }
+
+  .scenario-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .scene-label {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+  }
+
+  .scene-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .choice-btn {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.55;
+    font-family: sans-serif;
+    transition: background 0.12s, border-color 0.12s;
+  }
+
+  .choice-btn:hover:not(:disabled) {
+    background: var(--surface2);
+    border-color: var(--text3);
+  }
+
+  .choice-btn:disabled { cursor: default; }
+
+  .choice-btn.chosen-good {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+    color: var(--green-text);
+    opacity: 1;
+  }
+
+  .choice-btn.chosen-bad {
+    background: var(--red-bg);
+    border-color: var(--red-border);
+    color: var(--red-text);
+    opacity: 1;
+  }
+
+  .choice-btn.unchosen { opacity: 0.38; }
+
+  .feedback {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 1.65;
+    font-family: sans-serif;
+    display: none;
+    margin-bottom: 8px;
+  }
+
+  .feedback.good {
+    background: var(--green-bg);
+    color: var(--green-text);
+    border: 0.5px solid var(--green-border);
+  }
+
+  .feedback.bad {
+    background: var(--red-bg);
+    color: var(--red-text);
+    border: 0.5px solid var(--red-border);
+  }
+
+  .feedback.neutral {
+    background: var(--surface2);
+    color: var(--text2);
+    border: 0.5px solid var(--border2);
+  }
+
+  .delta-tag {
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 6px;
+  }
+
+  .delta-up { color: var(--red); }
+  .delta-down { color: var(--green); }
+
+  .next-btn {
+    display: none;
+    padding: 10px 20px;
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: background 0.12s;
+  }
+
+  .next-btn:hover { background: var(--surface2); }
+
+  /* Debriefing */
+  .debriefing {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .debrief-title {
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .metric-card {
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+
+  .metric-label {
+    font-size: 11px;
+    color: var(--text2);
+    margin-bottom: 4px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .metric-val {
+    font-size: 24px;
+    font-family: sans-serif;
+  }
+
+  .overall-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text2);
+    font-family: sans-serif;
+    margin-bottom: 1.25rem;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+  }
+
+  .history-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 13px;
+    font-family: sans-serif;
+    gap: 12px;
+  }
+
+  .history-row:last-child { border-bottom: none; }
+
+  .history-scene { color: var(--text2); flex: 1; }
+
+  .history-delta { white-space: nowrap; }
+
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: bold;
+    margin-left: 6px;
+  }
+
+  .tag.good { background: var(--green-bg); color: var(--green-text); }
+  .tag.bad { background: var(--red-bg); color: var(--red-text); }
+  .tag.neutral { background: var(--surface2); color: var(--text2); border: 0.5px solid var(--border2); }
+
+  .insights {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+    font-family: sans-serif;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .restart-btn {
+    margin-top: 1.25rem;
+    padding: 10px 20px;
+    background: transparent;
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: background 0.12s;
+  }
+
+  .restart-btn:hover { background: var(--surface2); }
+</style>
+</head>
+<body>
+<div class="game" id="app">
+  <h1>Stressmanagement</h1>
+  <p class="subtitle">Eine interaktive Arbeitswoche — deine Entscheidungen verändern dein Stresslevel</p>
+  <div id="content"></div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    label: "Montag, 8:30 Uhr — Büro",
+    text: "Du kommst ins Büro und dein Chef schreibt dir sofort: \"Kannst du den Quartalsbericht bis 10 Uhr fertig haben? Der war eigentlich erst nächste Woche fällig.\" Du hast den Bericht noch nicht angefangen.",
+    choices: [
+      { text: "Sofort antworten: \"Kein Problem, ich kümmere mich darum.\"", delta: 25, quality: "bad", feedback: "Du nimmst zu viel auf dich, ohne die Situation zu prüfen. Das führt zu Panikarbeit und mehr Stress." },
+      { text: "Kurz durchatmen, dann realistisch schreiben: \"Ich schaffe einen Entwurf bis 11 Uhr — ist das okay?\"", delta: -10, quality: "good", feedback: "Klar kommunizieren und Erwartungen managen ist eine starke Stressstrategie." },
+      { text: "Erstmal Kaffee holen und die Nachricht ignorieren.", delta: 30, quality: "bad", feedback: "Aufschub erhöht den Stress enorm, weil die Situation nicht besser wird." },
+      { text: "Kolleg:in um Hilfe bitten und die Aufgabe aufteilen.", delta: -5, quality: "good", feedback: "Gut delegieren und Netzwerke nutzen ist eine wertvolle Fähigkeit." },
+    ]
+  },
+  {
+    label: "Dienstag, 12:15 Uhr — Mittagspause",
+    text: "Du hast nur 20 Minuten Pause. Drei Kollegen wollen mit dir über ein Problem reden, dein Handy klingelt, und du hast seit dem Frühstück nichts gegessen.",
+    choices: [
+      { text: "Allen gleichzeitig helfen, dabei schnell etwas essen.", delta: 20, quality: "bad", feedback: "Multitasking in Pausen verhindert echte Erholung und erhöht die Erschöpfung." },
+      { text: "Handy auf stumm, Essen holen, klar sagen: \"Ich bin gleich wieder da.\"", delta: -15, quality: "good", feedback: "Grenzen setzen und für Grundbedürfnisse sorgen ist essenziell für Stressmanagement." },
+      { text: "Pause komplett streichen und weitermachen.", delta: 35, quality: "bad", feedback: "Keine Pausen = kein Reset. Der Körper baut Stresshormone ohne Pausen nicht ab." },
+      { text: "Kurz mit einem Kollegen sprechen, dann 10 Minuten allein sein.", delta: 0, quality: "neutral", feedback: "Ein Kompromiss — nicht ideal, aber du sorgst noch etwas für dich." },
+    ]
+  },
+  {
+    label: "Mittwoch, 17:00 Uhr — nach der Arbeit",
+    text: "Ein stressiger Tag liegt hinter dir. Dein Kopf dreht sich noch um unerledigte Aufgaben. Was machst du jetzt?",
+    choices: [
+      { text: "Noch 2 Stunden arbeiten, um \"alles fertig zu machen\".", delta: 30, quality: "bad", feedback: "Überstunden ohne Ende erhöhen chronischen Stress. Morgen kommt immer mehr." },
+      { text: "Spaziergang, dann kurzes Journaling über den Tag.", delta: -20, quality: "good", feedback: "Bewegung und Reflexion helfen dem Gehirn, den Arbeitsmodus zu verlassen." },
+      { text: "Netflix und Chips — Hauptsache abschalten.", delta: -5, quality: "neutral", feedback: "Passive Ablenkung hilft kurzfristig, aber baut Stress nicht wirklich ab." },
+      { text: "Freunde anrufen und über den Stress reden.", delta: -15, quality: "good", feedback: "Soziale Unterstützung ist einer der stärksten Puffer gegen Stress." },
+    ]
+  },
+  {
+    label: "Donnerstag, 9:00 Uhr — Meeting",
+    text: "Im Team-Meeting präsentierst du dein Projekt. Mitten in deiner Präsentation unterbricht dich ein Kollege mit Kritik — vor allen.",
+    choices: [
+      { text: "Sofort defensiv reagieren und erklären, warum du recht hast.", delta: 25, quality: "bad", feedback: "Defensivität eskaliert Konflikte und erhöht den Stress für alle — auch dich." },
+      { text: "Kurz innehalten: \"Danke für den Input — lass uns das nach dem Meeting vertiefen.\"", delta: -10, quality: "good", feedback: "Deeskalation und Grenzen ziehen im Meeting zeigt Souveränität und reduziert Stress." },
+      { text: "Nichts sagen, rot werden, innerlich kochen.", delta: 20, quality: "bad", feedback: "Unterdrückter Ärger erhöht physiologischen Stress erheblich." },
+      { text: "Die Kritik aufnehmen und fragen, welche Lösung er vorschlägt.", delta: -5, quality: "good", feedback: "Neugier statt Abwehr — das wandelt Konflikt in Zusammenarbeit um." },
+    ]
+  },
+  {
+    label: "Freitag, 18:00 Uhr — Wochenende beginnt",
+    text: "Es ist Freitagabend. Du merkst, dass du das Wochenende nicht richtig \"ankommst\". Dein Kopf ist noch voller Arbeit.",
+    choices: [
+      { text: "\"Shutdown-Ritual\": kurze To-do-Liste für Montag schreiben, dann Laptop zu.", delta: -20, quality: "good", feedback: "Bewusstes Abschließen der Woche gibt dem Gehirn die Erlaubnis, loszulassen." },
+      { text: "E-Mails noch schnell checken — nur kurz.", delta: 15, quality: "bad", feedback: "\"Nur kurz\" öffnet die Schleusen. Das Gehirn bleibt im Arbeitsmodus." },
+      { text: "Sport oder Tanzen gehen — etwas Körperliches.", delta: -20, quality: "good", feedback: "Körperliche Aktivität ist der direkteste Weg, Cortisol abzubauen." },
+      { text: "Frühzeitig schlafen gehen.", delta: -10, quality: "good", feedback: "Schlaf ist die wichtigste Erholungsressource — kluge Entscheidung." },
+    ]
+  }
+];
+
+let stress = 40, current = 0, choices = [], chosen = null, answered = false;
+
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+function stressColor(v) {
+  if (v < 35) return "#1D9E75";
+  if (v < 60) return "#EF9F27";
+  if (v < 80) return "#D85A30";
+  return "#E24B4A";
+}
+
+function stressLabel(v) {
+  if (v < 25) return "sehr entspannt";
+  if (v < 45) return "ausgeglichen";
+  if (v < 65) return "mäßig gestresst";
+  if (v < 80) return "stark gestresst";
+  return "überlastet";
+}
+
+function renderStressBar(v) {
+  const pct = clamp(v, 0, 100);
+  return `
+    <div class="stress-bar-wrap">
+      <div class="stress-label">
+        <span>Stresslevel</span>
+        <span style="color:var(--text)">${stressLabel(pct)}</span>
+      </div>
+      <div class="bar-outer">
+        <div class="bar-inner" style="width:${pct}%;background:${stressColor(pct)}"></div>
+      </div>
+      <div class="stress-value" style="color:${stressColor(pct)}">${Math.round(pct)} / 100</div>
+    </div>`;
+}
+
+function renderProgress() {
+  return '<div class="progress-wrap">' +
+    scenarios.map((_, i) => `<div class="dot ${i < current ? 'done' : i === current ? 'active' : ''}"></div>`).join('') +
+    '</div>';
+}
+
+function render() {
+  const content = document.getElementById('content');
+  if (current >= scenarios.length) { renderDebriefing(content); return; }
+
+  const s = scenarios[current];
+  let choicesHTML = '';
+
+  if (!answered) {
+    choicesHTML = s.choices.map((c, i) =>
+      `<button class="choice-btn" onclick="pick(${i})">${c.text}</button>`
+    ).join('');
+  } else {
+    const c = s.choices[chosen];
+    choicesHTML = s.choices.map((c2, i) => {
+      let cls = 'choice-btn ';
+      if (i === chosen) cls += c.quality === 'good' ? 'chosen-good' : c.quality === 'bad' ? 'chosen-bad' : '';
+      else cls += 'unchosen';
+      return `<button class="${cls}" disabled>${c2.text}</button>`;
+    }).join('');
+
+    const dSign = c.delta > 0 ? '+' : '';
+    choicesHTML += `<div class="feedback ${c.quality}" style="display:block">${c.feedback}<span class="delta-tag ${c.delta > 0 ? 'delta-up' : 'delta-down'}">${dSign}${c.delta}</span></div>`;
+    choicesHTML += `<button class="next-btn" style="display:inline-block" onclick="next()">${current < scenarios.length - 1 ? 'Nächste Situation →' : 'Auswertung ansehen →'}</button>`;
+  }
+
+  content.innerHTML =
+    renderStressBar(stress) +
+    renderProgress() +
+    `<div class="scenario-card">
+      <div class="scene-label">${s.label}</div>
+      <div class="scene-text">${s.text}</div>
+    </div>
+    <div class="choices">${choicesHTML}</div>`;
+}
+
+function pick(i) {
+  if (answered) return;
+  chosen = i; answered = true;
+  const c = scenarios[current].choices[i];
+  stress = clamp(stress + c.delta, 0, 100);
+  choices.push({ scene: scenarios[current].label, delta: c.delta, quality: c.quality });
+  render();
+}
+
+function next() {
+  current++; answered = false; chosen = null;
+  render();
+}
+
+function renderDebriefing(content) {
+  const pct = clamp(stress, 0, 100);
+  const goodCount = choices.filter(c => c.quality === 'good').length;
+  const badCount = choices.filter(c => c.quality === 'bad').length;
+  const totalDelta = choices.reduce((s, c) => s + c.delta, 0);
+
+  let overall = '';
+  if (pct < 35) overall = 'Du hast die Situationen sehr gut gemeistert. Du zeigst klare Stärken im Stressmanagement.';
+  else if (pct < 60) overall = 'Du hast es solide hinbekommen, mit einzelnen Lernmomenten. Weiter üben!';
+  else overall = 'Du bist stark unter Druck geraten. Die gute Nachricht: Stressmanagement ist lernbar!';
+
+  const rows = choices.map(c => {
+    const dSign = c.delta > 0 ? '+' : '';
+    const tagClass = c.quality;
+    const tagText = c.quality === 'good' ? 'Hilfreich' : c.quality === 'bad' ? 'Stressend' : 'Neutral';
+    return `<div class="history-row">
+      <span class="history-scene">${c.scene}</span>
+      <span class="history-delta">${dSign}${c.delta}<span class="tag ${tagClass}">${tagText}</span></span>
+    </div>`;
+  }).join('');
+
+  content.innerHTML =
+    renderStressBar(pct) +
+    `<div class="debriefing">
+      <div class="debrief-title">Auswertung — deine Woche</div>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Hilfreiche Entscheidungen</div>
+          <div class="metric-val" style="color:var(--green)">${goodCount} / ${choices.length}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Stressende Entscheidungen</div>
+          <div class="metric-val" style="color:var(--red)">${badCount} / ${choices.length}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Gesamtveränderung</div>
+          <div class="metric-val" style="color:${totalDelta > 0 ? 'var(--red)' : 'var(--green)'}">${totalDelta > 0 ? '+' : ''}${totalDelta}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Finales Level</div>
+          <div class="metric-val" style="color:${stressColor(pct)}">${Math.round(pct)}</div>
+        </div>
+      </div>
+      <div class="overall-text">${overall}</div>
+      ${rows}
+      <div class="insights">
+        <strong>Wichtigste Erkenntnisse:</strong> Grenzen setzen, realistische Kommunikation, Pausen einhalten und soziale Unterstützung suchen — das sind die vier stärksten Hebel gegen arbeitsbedingten Stress.
+      </div>
+      <button class="restart-btn" onclick="restart()">Nochmal spielen ↺</button>
+    </div>`;
+}
+
+function restart() {
+  stress = 40; current = 0; choices = []; chosen = null; answered = false;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
