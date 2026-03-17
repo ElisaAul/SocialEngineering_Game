@@ -1,0 +1,161 @@
+﻿title: Start
+---
+<<set_scene_label "Montag, 8:30 Uhr — Büro">>
+jump Montag
+===
+
+title: Montag
+---
+Du kommst ins Büro und dein Chef schreibt dir sofort:
+„Kannst du den Quartalsbericht bis 10 Uhr fertig haben? Der war eigentlich erst nächste Woche fällig."
+Du hast den Bericht noch nicht angefangen.
+
+-> Sofort antworten: „Kein Problem, ich kümmere mich darum."
+    <<add_stress 25>>
+    <<show_feedback "Du nimmst zu viel auf dich, ohne die Situation zu prüfen. Das führt zu Panikarbeit und mehr Stress." "bad">>
+    <<wait 3.8>>
+    jump Dienstag
+
+-> Kurz durchatmen, dann realistisch schreiben: „Ich schaffe einen Entwurf bis 11 Uhr."
+    <<add_stress -10>>
+    <<show_feedback "Klar kommunizieren und Erwartungen managen ist eine starke Stressstrategie." "good">>
+    <<wait 3.8>>
+    jump Dienstag
+
+-> Erstmal Kaffee holen und die Nachricht ignorieren.
+    <<add_stress 30>>
+    <<show_feedback "Aufschub erhöht den Stress enorm, weil die Situation nicht besser wird." "bad">>
+    <<wait 3.8>>
+    jump Dienstag
+
+-> Kolleg:in um Hilfe bitten und die Aufgabe aufteilen.
+    <<add_stress -5>>
+    <<show_feedback "Gut delegieren und Netzwerke nutzen ist eine wertvolle Fähigkeit." "good">>
+    <<wait 3.8>>
+    jump Dienstag
+===
+
+title: Dienstag
+---
+<<set_scene_label "Dienstag, 12:15 Uhr — Mittagspause">>
+Du hast nur 20 Minuten Pause. Drei Kollegen wollen mit dir reden, dein Handy klingelt, und du hast seit dem Frühstück nichts gegessen.
+
+-> Allen gleichzeitig helfen, dabei schnell etwas essen.
+    <<add_stress 20>>
+    <<show_feedback "Multitasking in Pausen verhindert echte Erholung und erhöht die Erschöpfung." "bad">>
+    <<wait 3.8>>
+    jump Mittwoch
+
+-> Handy auf stumm, Essen holen, klar sagen: „Ich bin gleich wieder da."
+    <<add_stress -15>>
+    <<show_feedback "Grenzen setzen und für Grundbedürfnisse sorgen ist essenziell für Stressmanagement." "good">>
+    <<wait 3.8>>
+    jump Mittwoch
+
+-> Pause komplett streichen und weitermachen.
+    <<add_stress 35>>
+    <<show_feedback "Keine Pausen = kein Reset. Der Körper baut Stresshormone ohne Pausen nicht ab." "bad">>
+    <<wait 3.8>>
+    jump Mittwoch
+
+-> Kurz mit einem Kollegen sprechen, dann 10 Minuten allein sein.
+    <<add_stress 0>>
+    <<show_feedback "Ein Kompromiss — nicht ideal, aber du sorgst noch etwas für dich." "neutral">>
+    <<wait 3.8>>
+    jump Mittwoch
+===
+
+title: Mittwoch
+---
+<<set_scene_label "Mittwoch, 17:00 Uhr — nach der Arbeit">>
+Ein stressiger Tag liegt hinter dir. Dein Kopf dreht sich noch um unerledigte Aufgaben. Was machst du jetzt?
+
+-> Noch 2 Stunden arbeiten, um „alles fertig zu machen".
+    <<add_stress 30>>
+    <<show_feedback "Überstunden ohne Ende erhöhen chronischen Stress. Morgen kommt immer mehr." "bad">>
+    <<wait 3.8>>
+    jump Donnerstag
+
+-> Spaziergang, dann kurzes Journaling über den Tag.
+    <<add_stress -20>>
+    <<show_feedback "Bewegung und Reflexion helfen dem Gehirn, den Arbeitsmodus zu verlassen." "good">>
+    <<wait 3.8>>
+    jump Donnerstag
+
+-> Netflix und Chips — Hauptsache abschalten.
+    <<add_stress -5>>
+    <<show_feedback "Passive Ablenkung hilft kurzfristig, aber baut Stress nicht wirklich ab." "neutral">>
+    <<wait 3.8>>
+    jump Donnerstag
+
+-> Freunde anrufen und über den Stress reden.
+    <<add_stress -15>>
+    <<show_feedback "Soziale Unterstützung ist einer der stärksten Puffer gegen Stress." "good">>
+    <<wait 3.8>>
+    jump Donnerstag
+===
+
+title: Donnerstag
+---
+<<set_scene_label "Donnerstag, 9:00 Uhr — Meeting">>
+Im Team-Meeting präsentierst du dein Projekt. Mitten in deiner Präsentation unterbricht dich ein Kollege mit Kritik — vor allen.
+
+-> Sofort defensiv reagieren und erklären, warum du recht hast.
+    <<add_stress 25>>
+    <<show_feedback "Defensivität eskaliert Konflikte und erhöht den Stress für alle — auch dich." "bad">>
+    <<wait 3.8>>
+    jump Freitag
+
+-> Kurz innehalten: „Danke für den Input — lass uns das nach dem Meeting vertiefen."
+    <<add_stress -10>>
+    <<show_feedback "Deeskalation im Meeting zeigt Souveränität und reduziert Stress." "good">>
+    <<wait 3.8>>
+    jump Freitag
+
+-> Nichts sagen, rot werden, innerlich kochen.
+    <<add_stress 20>>
+    <<show_feedback "Unterdrückter Ärger erhöht physiologischen Stress erheblich." "bad">>
+    <<wait 3.8>>
+    jump Freitag
+
+-> Die Kritik aufnehmen und fragen, welche Lösung er vorschlägt.
+    <<add_stress -5>>
+    <<show_feedback "Neugier statt Abwehr — das wandelt Konflikt in Zusammenarbeit um." "good">>
+    <<wait 3.8>>
+    jump Freitag
+===
+
+title: Freitag
+---
+<<set_scene_label "Freitag, 18:00 Uhr — Wochenende beginnt">>
+Es ist Freitagabend. Du merkst, dass du das Wochenende nicht richtig „ankommst". Dein Kopf ist noch voller Arbeit.
+
+-> „Shutdown-Ritual": kurze To-do-Liste für Montag schreiben, dann Laptop zu.
+    <<add_stress -20>>
+    <<show_feedback "Bewusstes Abschließen der Woche gibt dem Gehirn die Erlaubnis, loszulassen." "good">>
+    <<wait 3.8>>
+    jump Debriefing
+
+-> E-Mails noch schnell checken — nur kurz.
+    <<add_stress 15>>
+    <<show_feedback "„Nur kurz" öffnet die Schleusen. Das Gehirn bleibt im Arbeitsmodus." "bad">>
+    <<wait 3.8>>
+    jump Debriefing
+
+-> Sport oder Tanzen gehen — etwas Körperliches.
+    <<add_stress -20>>
+    <<show_feedback "Körperliche Aktivität ist der direkteste Weg, Cortisol abzubauen." "good">>
+    <<wait 3.8>>
+    jump Debriefing
+
+-> Frühzeitig schlafen gehen.
+    <<add_stress -10>>
+    <<show_feedback "Schlaf ist die wichtigste Erholungsressource — kluge Entscheidung." "good">>
+    <<wait 3.8>>
+    jump Debriefing
+===
+
+title: Debriefing
+---
+<<load_debriefing>>
+===
